@@ -54,7 +54,7 @@ public class PathRequestManager : MonoBehaviour
             currentPathRequest = pathRequestQueue.Dequeue();
             isProcessingPath = true;
             // Llamamos al algoritmo A* en un hilo de trabajo o Coroutine (aquí lo haremos directo para simplificar).
-            Pathfinder.FindPath(currentPathRequest.pathStart, currentPathRequest.pathEnd, FindFirstObjectByType<MapGrid>()); 
+            Pathfinder.FindPath(currentPathRequest.pathStart, currentPathRequest.pathEnd, FindObjectOfType<MapGrid>()); 
         }
     }
 
