@@ -4,14 +4,22 @@ public class LevelManager : MonoBehaviour
 {
     public static LevelManager Instance;
     public bool disableAmbienceMusic = false;
-    public bool isPlayerFinded = false;    
+    public bool isPlayerFinded = false;
     public bool activateWaveEnemy = false;
+    
+    [SerializeField] Texture2D cursorTexture; 
+    [SerializeField] Vector2 hotSpot = Vector2.zero; 
+    private CursorMode cursorMode = CursorMode.Auto;
+
+
     private void Start()
     {
         if (!disableAmbienceMusic)
             AudioManager.Instance.Play("Ambience_Level1");
-        
+
         ResourceManager.Instance.AddResources("Amunitio", 5);
+        
+        Cursor.SetCursor(cursorTexture, hotSpot, cursorMode);
     }
     private void Awake()
     {

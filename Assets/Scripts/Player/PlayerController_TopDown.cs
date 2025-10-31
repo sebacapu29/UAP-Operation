@@ -9,10 +9,7 @@ public class PlayerController_TopDown : MonoBehaviour
     [Tooltip("Velocidad de movimiento del jugador.")]
     [SerializeField] float moveSpeed = 5f;
     [SerializeField] LayerMask groundLayer;
-    [SerializeField] Transform target;
-    [SerializeField] GameObject bulletPrefab;
-    [SerializeField] Transform firePoint;
-    [SerializeField] GameObject flashLight;
+    // [SerializeField] Transform target;
     [SerializeField] float rotationSpeed = 5f;
 
     private Rigidbody rb;
@@ -59,7 +56,7 @@ public class PlayerController_TopDown : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.F))
         {
-            flashLight.SetActive(!flashLight.activeInHierarchy);
+            // flashLight.SetActive(!flashLight.activeInHierarchy);
         }
     }
 
@@ -76,8 +73,8 @@ public class PlayerController_TopDown : MonoBehaviour
         float currentSpeed = rb.velocity.magnitude;
 
         // Pasar valores al Animator
-        anim.SetFloat("SpeedZ", verticalInput);
-        anim.SetFloat("SpeedX", horizontalInput);
+        // anim.SetFloat("SpeedZ", verticalInput);
+        // anim.SetFloat("SpeedX", horizontalInput);
 
 
 
@@ -104,29 +101,4 @@ public class PlayerController_TopDown : MonoBehaviour
             }
         }
     }
-
-    //private void HandleFireInput()
-    //{
-    //    // Comprobar si se presiona el botón de disparo y si el cooldown ha pasado.
-    //    if (Input.GetButton("Fire1") && Time.time >= lastFireTime + fireCooldown)
-    //    {
-    //        FireProjectile();
-    //        lastFireTime = Time.time;
-    //    }
-    //}
-
-    //private void FireProjectile()
-    //{
-
-    //    if (objectPooler == null || firePoint == null)
-    //    {
-    //        Debug.LogError("ObjectPooler o FirePoint no están asignados.");
-    //        return;
-    //    }
-
-    //    // Obtener un proyectil de la reserva. Usamos la etiqueta para encontrar el tipo correcto.
-    //    GameObject projectile = objectPooler.SpawnFromPool(projectileTag, firePoint.position, firePoint.rotation);
-
-
-    //}
 }

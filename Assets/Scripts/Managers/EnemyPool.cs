@@ -41,9 +41,9 @@ public class EnemyPool : MonoBehaviour
 
     void AddEnemyToPool()
     {
-        GameObject enemy = Instantiate(enemyPrefab);
-        enemy.SetActive(false);
-        availableEnemies.Enqueue(enemy);
+        // GameObject enemy = Instantiate(enemyPrefab);
+        // enemy.SetActive(false);
+        // availableEnemies.Enqueue(enemy);
     }
 
     public GameObject GetEnemy(Vector3 position)

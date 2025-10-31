@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        transform.SetParent(null);
         // If an instance already exists and it's not this one, destroy this new instance
         if (Instance != null && Instance != this)
         {
@@ -42,7 +43,7 @@ public class GameManager : MonoBehaviour
             if (player != null)
                 playerHealth = player.GetComponent<PlayerHealth>();
 
-            btnPlay.onClick.AddListener(() => LoadScene());
+            // btnPlay.onClick.AddListener(() => LoadScene());
         }
     }
     void LoadScene()
@@ -60,12 +61,12 @@ public class GameManager : MonoBehaviour
 
         if (isGameOver || isMissionComplete)
         {
-            title.text = isGameOver ? "Game Over" : "Mission Complete!";
-            gameOverMenu.SetActive(true);
-            AudioManager.Instance.Stop("Ambience_Level1");
-            //AudioManager.Instance.Play("GameOver");
-            Time.timeScale = 0f; // Pause the game
-            Cursor.visible = true;
+            // title.text = isGameOver ? "Game Over" : "Mission Complete!";
+            // gameOverMenu.SetActive(true);
+            // AudioManager.Instance.Stop("Ambience_Level1");
+            // //AudioManager.Instance.Play("GameOver");
+            // Time.timeScale = 0f; // Pause the game
+            // Cursor.visible = true;
         }
 
     }
