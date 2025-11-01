@@ -9,6 +9,7 @@ TagManager:
   - Sedative
   - Collectable
   - Enemy
+  - Bullet
   layers:
   - Default
   - TransparentFX
