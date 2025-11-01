@@ -14,12 +14,13 @@ public class PlayerMovement : MonoBehaviour
 
     private CharacterController controller;
     private Vector3 velocity;
-    private float xRotation = 0f;
-
+    // private float xRotation = 0f;
+    private Actions actions;
     void Start()
     {
         controller = GetComponent<CharacterController>();
-        //Cursor.lockState = CursorLockMode.Locked;
+        Cursor.lockState = CursorLockMode.Locked;
+        actions = GetComponentInChildren<Actions>();
     }
 
     void Update()
@@ -40,6 +41,11 @@ public class PlayerMovement : MonoBehaviour
 
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
+        bool isMoving = moveDirection.magnitude > 0;
+        if (isMoving)
+            actions.Run();
+        else
+            actions.Stay();
     }
 
     void HandleRotation()

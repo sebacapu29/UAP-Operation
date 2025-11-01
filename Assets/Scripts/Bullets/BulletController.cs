@@ -38,22 +38,6 @@ public class BulletController : MonoBehaviour
         //    ObjectPooler.Instance.ReturnToPool(this.gameObject);
     }
 
-    // Usamos OnTriggerEnter para detectar colisiones cuando el objeto
-    //void OnCollisionEnter(Collision other)
-    //{
-    //    // Intentar obtener el componente IDamageable del objeto con el que chocamos.
-    //    HealthManager healthManager = other.gameObject.GetComponent<HealthManager>();
-    //    //IDamageable damageableObject = enemyHealth.GetComponent<IDamageable>();
-
-    //    if (healthManager != null)
-    //    {
-    //        healthManager.TakeDamage(damageAmount);
-    //    }
-
-    //    // Devolver el proyectil a la reserva de objetos para su reutilización.
-    //    // Asumimos que ObjectPooler es un Singleton con acceso global.
-    //    ObjectPooler.Instance.ReturnToPool(this.gameObject);
-    //}
     public void SetDirection(Vector3 newDirection)
     {
         direction = newDirection;
