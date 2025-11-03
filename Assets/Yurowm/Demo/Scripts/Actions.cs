@@ -64,8 +64,15 @@ public class Actions : MonoBehaviour {
 		animator.SetBool("Aiming", true);
 	}
 
-	public void Sitting () {
-		animator.SetBool ("Squat", !animator.GetBool("Squat"));
+	public void Sitting()
+	{
+		animator.SetBool("Squat", !animator.GetBool("Squat"));
 		animator.SetBool("Aiming", false);
 	}
+	
+	 public void SetSpeed(float speed)
+    {
+        animator.SetFloat("Speed", speed);
+    }
+
 }

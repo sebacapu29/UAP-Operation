@@ -29,24 +29,26 @@ public class PlayerMovement : MonoBehaviour
         HandleRotation();
     }
 
-    void HandleMovement()
-    {
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
+   void HandleMovement()
+{
+    float horizontal = Input.GetAxis("Horizontal");
+    float vertical = Input.GetAxis("Vertical");
 
-        Vector3 moveDirection = cameraTransform.forward * vertical + cameraTransform.right * horizontal;
-        moveDirection.y = 0f; 
+    Vector3 moveDirection = cameraTransform.forward * vertical + cameraTransform.right * horizontal;
+    moveDirection.y = 0f;
 
-        controller.Move(moveDirection.normalized * moveSpeed * Time.deltaTime);
+    float inputMagnitude = Mathf.Clamp01(new Vector2(horizontal, vertical).magnitude);
 
-        velocity.y += gravity * Time.deltaTime;
-        controller.Move(velocity * Time.deltaTime);
-        bool isMoving = moveDirection.magnitude > 0;
-        if (isMoving)
-            actions.Run();
-        else
-            actions.Stay();
-    }
+    // Movimiento físico
+    controller.Move(moveDirection.normalized * moveSpeed * inputMagnitude * Time.deltaTime);
+
+    // Aplicar gravedad
+    velocity.y += gravity * Time.deltaTime;
+    controller.Move(velocity * Time.deltaTime);
+
+    // Animación
+    actions.SetSpeed(inputMagnitude);
+}
 
     void HandleRotation()
     {
