@@ -10,56 +10,60 @@ public class PlayerMovement : MonoBehaviour
     [Header("Rotación")]
     public float mouseSensitivity = 100f;
     public Transform playerBody; 
-    public Transform cameraTransform; 
-
+    public Transform cameraTransform;
+    private float rotationSpeed = 90f;
+    private float rotationSmooth = 5f; 
     private CharacterController controller;
     private Vector3 velocity;
-    // private float xRotation = 0f;
-    private Actions actions;
+    private Animator anim;
+    
+    private float currentMouseX;
+
     void Start()
     {
         controller = GetComponent<CharacterController>();
         Cursor.lockState = CursorLockMode.Locked;
-        actions = GetComponentInChildren<Actions>();
+        anim = GetComponentInChildren<Animator>();
     }
 
     void Update()
     {
         HandleMovement();
         HandleRotation();
+       
     }
 
-   void HandleMovement()
-{
-    float horizontal = Input.GetAxis("Horizontal");
-    float vertical = Input.GetAxis("Vertical");
+    void HandleMovement()
+    {
+        float horizontalInput = Input.GetAxisRaw("Horizontal");
+        float verticalInput = Input.GetAxisRaw("Vertical");
 
-    Vector3 moveDirection = cameraTransform.forward * vertical + cameraTransform.right * horizontal;
-    moveDirection.y = 0f;
+        Vector3 movement = new Vector3(horizontalInput, 0f, verticalInput).normalized;
 
-    float inputMagnitude = Mathf.Clamp01(new Vector2(horizontal, vertical).magnitude);
+        // Convertir movimiento local a global según la dirección del personaje
+        Vector3 moveDirection = transform.TransformDirection(movement);
 
-    // Movimiento físico
-    controller.Move(moveDirection.normalized * moveSpeed * inputMagnitude * Time.deltaTime);
+        // Aplicar movimiento con CharacterController
+        controller.Move(moveDirection * moveSpeed * Time.deltaTime);
 
-    // Aplicar gravedad
-    velocity.y += gravity * Time.deltaTime;
-    controller.Move(velocity * Time.deltaTime);
+        // Aplicar gravedad
+        velocity.y += gravity * Time.deltaTime;
+        controller.Move(velocity * Time.deltaTime);
+        // HandleRotation(horizontalInput);
+        // Pasar valores al Animator
+        anim.SetFloat("SpeedZ", verticalInput);
+        anim.SetFloat("SpeedX", -1 * horizontalInput);
+    }
 
-    // Animación
-    actions.SetSpeed(inputMagnitude);
-}
 
-    void HandleRotation()
+ void HandleRotation()
     {
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
+        currentMouseX += mouseX;
 
-        transform.Rotate(Vector3.up * mouseX);
-
-        Vector3 lookDirection = new Vector3(cameraTransform.forward.x, 0, cameraTransform.forward.z);
-        if (lookDirection != Vector3.zero)
-        {
-            playerBody.rotation = Quaternion.LookRotation(lookDirection);
-        }
+        // Rotación suave del Player
+        Quaternion targetRotation = Quaternion.Euler(0f, currentMouseX, 0f);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSmooth * Time.deltaTime);
     }
+
 }
