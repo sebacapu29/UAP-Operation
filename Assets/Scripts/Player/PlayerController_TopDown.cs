@@ -18,7 +18,7 @@ public class PlayerController_TopDown : MonoBehaviour
     //MiraController miraController;
     //private ObjectPooler objectPooler;
     private Animator anim;
-    private float speed=0f;
+    // private float speed=0f;
     private void Awake()
     {
         //objectPooler = ObjectPooler.Instance;

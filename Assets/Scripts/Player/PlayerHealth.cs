@@ -9,11 +9,11 @@ public class PlayerHealth : HealthManager
         //Detectar si el jugador lo atraviesa una bala
         if(other.CompareTag("Bullet"))
         {
-            //Intentar hacer daño
+            //Intentar hacer daï¿½o
             IDamageable damageable = other.GetComponent<IDamageable>();
             if(damageable != null)
             {
-                damageable.TakeDamage(10); //Daño fijo por ahora
+                damageable.TakeDamage(10); //Daï¿½o fijo por ahora
             }
         }
     }

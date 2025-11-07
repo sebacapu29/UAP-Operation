@@ -19,7 +19,7 @@ public class LevelManager : MonoBehaviour
 
         ResourceManager.Instance.AddResources("Amunitio", 5);
         
-        Cursor.SetCursor(cursorTexture, hotSpot, cursorMode);
+        // Cursor.SetCursor(cursorTexture, hotSpot, cursorMode);
     }
     private void Awake()
     {
