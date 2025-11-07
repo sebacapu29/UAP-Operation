@@ -22,7 +22,7 @@ public class EnemyIAController : MonoBehaviour
     //[SerializeField] float chaseSpeed = 5f;
     [SerializeField] float detectionRange = 10f;
     [SerializeField] float attackRange = 10f;
-    [SerializeField] int attackDamage = 10;
+    // [SerializeField] int attackDamage = 10;
     [SerializeField] float attackRate = 1f;
     [SerializeField] Transform[] patrolWaypoints;
     [SerializeField] int currentWaypointIndex;

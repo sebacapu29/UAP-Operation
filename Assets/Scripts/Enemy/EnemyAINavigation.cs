@@ -11,7 +11,7 @@ public class EnemyAINavigation : MonoBehaviour
     NavMeshAgent _agent;
     EnemyLookAt enemyLookAt;
     bool isEnemyChaser = false;
-    private int currentWaveIndex = 0;
+    // private int currentWaveIndex = 0;
     private float timeToNextWave = 0f;
    private float _reductionInterval = 10f; // cada cuántos segundos
 

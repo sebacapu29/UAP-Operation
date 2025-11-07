@@ -23,6 +23,7 @@ public class ObjectPooler : MonoBehaviour
     [SerializeField] Transform target;
     void Awake()
     {
+        transform.SetParent(null);
         // Implementación del patrón Singleton.
         if (Instance == null)
         {

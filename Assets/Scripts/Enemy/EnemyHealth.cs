@@ -16,7 +16,7 @@ public class EnemyHealth : HealthManager, IDamageable
     {
         enemyIA = GetComponent<EnemyIAController>();
         campOfVision = GetComponent<SphereCollider>();
-        sleepIcon.SetActive(false);
+        // sleepIcon.SetActive(false);
 
         enemyLookAt = GetComponent<EnemyLookAt>();
     }

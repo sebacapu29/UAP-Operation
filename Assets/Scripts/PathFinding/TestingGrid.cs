@@ -8,7 +8,9 @@ public class TestingGrid : MonoBehaviour
     void Start()
     {
         // Obtener la única instancia del Grid Manager en la escena.
-        gridManager = FindFirstObjectByType<MapGrid>();
+    
+        gridManager = FindObjectOfType<MapGrid>();
+        //gridManager = FindFirstObjectByType<MapGrid>();
 
         if (gridManager == null)
         {
