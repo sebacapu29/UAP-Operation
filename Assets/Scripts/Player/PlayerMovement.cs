@@ -11,13 +11,12 @@ public class PlayerMovement : MonoBehaviour
     public float mouseSensitivity = 100f;
     public Transform playerBody; 
     public Transform cameraTransform;
-    private float rotationSpeed = 90f;
+    private float rotationSpeed = 20f;
     private float rotationSmooth = 5f; 
     private CharacterController controller;
     private Vector3 velocity;
     private Animator anim;
-    
-    private float currentMouseX;
+
 
     void Start()
     {
@@ -28,15 +27,15 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        HandleMovement();
-        // HandleRotation();
+        float horizontalInput = Input.GetAxisRaw("Horizontal");
+        float verticalInput = Input.GetAxisRaw("Vertical");
+        HandleMovement(horizontalInput, verticalInput);
+        HandleRotation(horizontalInput);
        
     }
 
-    void HandleMovement()
+    void HandleMovement(float horizontalInput, float verticalInput)
     {
-        float horizontalInput = Input.GetAxisRaw("Horizontal");
-        float verticalInput = Input.GetAxisRaw("Vertical");
 
         Vector3 movement = new Vector3(horizontalInput, 0f, verticalInput).normalized;
 
@@ -49,7 +48,6 @@ public class PlayerMovement : MonoBehaviour
         // Aplicar gravedad
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
-        HandleRotation(horizontalInput);
         // Pasar valores al Animator
         anim.SetFloat("SpeedZ", verticalInput);
         anim.SetFloat("SpeedX", -1 * horizontalInput);
@@ -65,15 +63,5 @@ void HandleRotation(float horizontalInput)
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSmooth);
     }
 }
-
-//  void HandleRotation()
-//     {
-//         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
-//         currentMouseX += mouseX;
-
-//         // Rotación suave del Player
-//         Quaternion targetRotation = Quaternion.Euler(0f, currentMouseX, 0f);
-//         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSmooth * Time.deltaTime);
-//     }
 
 }
