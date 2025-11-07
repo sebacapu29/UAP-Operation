@@ -29,7 +29,7 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         HandleMovement();
-        HandleRotation();
+        // HandleRotation();
        
     }
 
@@ -49,21 +49,31 @@ public class PlayerMovement : MonoBehaviour
         // Aplicar gravedad
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
-        // HandleRotation(horizontalInput);
+        HandleRotation(horizontalInput);
         // Pasar valores al Animator
         anim.SetFloat("SpeedZ", verticalInput);
         anim.SetFloat("SpeedX", -1 * horizontalInput);
     }
 
 
- void HandleRotation()
+void HandleRotation(float horizontalInput)
+{
+    if (Mathf.Abs(horizontalInput) > 0.1f)
     {
-        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
-        currentMouseX += mouseX;
-
-        // Rotación suave del Player
-        Quaternion targetRotation = Quaternion.Euler(0f, currentMouseX, 0f);
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSmooth * Time.deltaTime);
+        float targetAngle = transform.eulerAngles.y + (horizontalInput * rotationSpeed);
+        Quaternion targetRotation = Quaternion.Euler(0, targetAngle, 0);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSmooth);
     }
+}
+
+//  void HandleRotation()
+//     {
+//         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
+//         currentMouseX += mouseX;
+
+//         // Rotación suave del Player
+//         Quaternion targetRotation = Quaternion.Euler(0f, currentMouseX, 0f);
+//         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSmooth * Time.deltaTime);
+//     }
 
 }
