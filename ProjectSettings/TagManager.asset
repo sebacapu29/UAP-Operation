@@ -10,6 +10,7 @@ TagManager:
   - Collectable
   - Enemy
   - Bullet
+  - CardKey
   layers:
   - Default
   - TransparentFX
