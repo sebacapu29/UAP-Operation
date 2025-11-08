@@ -77,13 +77,13 @@ public class WaveManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        timeToNextWave += Time.deltaTime;
-        var playerIsDiscovered = LevelManager.Instance.activateWaveEnemy && currentWaveIndex == 0;
-        if (timeToNextWave >= _reductionInterval && playerIsDiscovered)
-        {
-            timeToNextWave = 0f;
-            StartCoroutine(StartWaves(currentWaveIndex));
-        }
+        // timeToNextWave += Time.deltaTime;
+        // var playerIsDiscovered = LevelManager.Instance.activateWaveEnemy && currentWaveIndex == 0;
+        // if (timeToNextWave >= _reductionInterval && playerIsDiscovered)
+        // {
+        //     timeToNextWave = 0f;
+        //     StartCoroutine(StartWaves(currentWaveIndex));
+        // }
             
         
     }
