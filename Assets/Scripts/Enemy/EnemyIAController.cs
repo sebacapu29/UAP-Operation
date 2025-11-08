@@ -55,7 +55,6 @@ public class EnemyIAController : MonoBehaviour
 
     void Update()
     {
-
         switch (currentState)
         {
             case AIState.Idle:
@@ -74,7 +73,7 @@ public class EnemyIAController : MonoBehaviour
                     currentState = AIState.Chase;
                 }
 
-                if(gameObject.tag == "EnemyChaser")
+                if (gameObject.tag == "EnemyChaser")
                 {
                     currentState = AIState.Chase;
                     break;
