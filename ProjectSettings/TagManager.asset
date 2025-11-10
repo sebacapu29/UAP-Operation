@@ -11,11 +11,12 @@ TagManager:
   - Enemy
   - Bullet
   - MovableObject
+  - CardKey
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Enemies
   - Water
   - UI
   - Floor
