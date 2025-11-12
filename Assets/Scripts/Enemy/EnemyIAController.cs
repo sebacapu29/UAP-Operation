@@ -90,7 +90,15 @@ public class EnemyIAController : MonoBehaviour
 
             case AIState.Chase:
                 // do chase
-                navMeshAgent.isStopped = false;
+                if (navMeshAgent.isActiveAndEnabled) // Asegúrate de que el agente esté activo y habilitado
+                {
+                    // Puedes agregar otra verificación si es necesario, aunque isActiveAndEnabled suele ser suficiente
+                    if (navMeshAgent.isOnNavMesh) // Esto es redundante si isActiveAndEnabled es True en la práctica, pero más seguro.
+                    {
+                       navMeshAgent.isStopped = false;
+                    }
+                }
+                
                 if (player != null)
                 {
                     //AnimationHandler();
@@ -111,8 +119,16 @@ public class EnemyIAController : MonoBehaviour
                 break;
 
             case AIState.Attack:
+            if (navMeshAgent.isActiveAndEnabled) // Asegúrate de que el agente esté activo y habilitado
+            {
+                // Puedes agregar otra verificación si es necesario, aunque isActiveAndEnabled suele ser suficiente
+                if (navMeshAgent.isOnNavMesh) // Esto es redundante si isActiveAndEnabled es True en la práctica, pero más seguro.
+                {
+                    navMeshAgent.isStopped = true; 
+                }
+            }
                 // do chase
-                navMeshAgent.isStopped = true;
+                
                 // --- Hacer que el enemigo mire hacia el jugador ---
                 if (player != null)
                 {

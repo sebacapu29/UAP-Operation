@@ -13,7 +13,7 @@ public class DoorController : MonoBehaviour
         else
         {
             // Simple movimiento de levantar puerta
-            transform.position += new Vector3(0f, 2f, 0f);
+            transform.position += new Vector3(0f, 3f, 0f);
         }
     }
 }
