@@ -12,10 +12,12 @@ public class EnemyHealth : HealthManager, IDamageable
     private EnemyLookAt enemyLookAt;
     private Coroutine sleepRoutine;
     internal bool isEnemySleeped = false;
+    private Animator animator;
     private void Awake()
     {
         enemyIA = GetComponent<EnemyIAController>();
         campOfVision = GetComponent<SphereCollider>();
+        animator = GetComponentInChildren<Animator>();
         // sleepIcon.SetActive(false);
 
         enemyLookAt = GetComponent<EnemyLookAt>();
@@ -27,6 +29,7 @@ public class EnemyHealth : HealthManager, IDamageable
     public void Sleep()
     {
         isEnemySleeped = true;
+           
         // Si ya hab�a una rutina, la detenemos
         if (sleepRoutine != null)
             StopCoroutine(sleepRoutine);
@@ -40,6 +43,7 @@ public class EnemyHealth : HealthManager, IDamageable
     private IEnumerator DoSleepRoutine()
     {
         // 1. Estado Idle y icono activo
+        animator.SetTrigger("Falling");
         enemyIA.CurrentState = EnemyIAController.AIState.Sleeping;
         sleepIcon.SetActive(true);
         if (enemyLookAt != null)
@@ -55,7 +59,7 @@ public class EnemyHealth : HealthManager, IDamageable
 
         // 3. Esperamos el timer
         yield return new WaitForSeconds(sleepDuration);
-
+        animator.SetTrigger("StandUp");
         // 4. Volvemos a Patrol, ocultamos el icono y reactivamos visi�n
         enemyIA.CurrentState = EnemyIAController.AIState.Patrol;
         sleepIcon.SetActive(false);
@@ -76,7 +80,7 @@ public class EnemyHealth : HealthManager, IDamageable
         if (sleepRoutine != null)
             StopCoroutine(sleepRoutine);
 
-        enemyIA.CurrentState = EnemyIAController.AIState.Chase; // o el estado que prefieras
+        enemyIA.CurrentState = EnemyIAController.AIState.Patrol; 
         sleepIcon.SetActive(false);
         campOfVision.enabled = true;
         sleepRoutine = null;

@@ -78,7 +78,7 @@ public class EnemyIAController : MonoBehaviour
                     currentState = AIState.Chase;
                     break;
                 }
-                if (navMeshAgent.remainingDistance < navMeshAgent.stoppingDistance)
+                if (navMeshAgent.remainingDistance < navMeshAgent.stoppingDistance && patrolWaypoints.Length > 0)
                 {
                     currentWaypointIndex = (currentWaypointIndex + 1) % patrolWaypoints.Length;
                     navMeshAgent.SetDestination(patrolWaypoints[currentWaypointIndex].position);
@@ -102,7 +102,8 @@ public class EnemyIAController : MonoBehaviour
                 if (player != null)
                 {
                     //AnimationHandler();
-
+                    // Debug.Log("Distance " + Vector3.Distance(transform.position, player.position) + " AttackRange " + attackRange);
+                    
                     // Si el jugador está en rango de ataque, pasamos al estado de ataque.
                     if (Vector3.Distance(transform.position, player.position) <= attackRange)
                     {
@@ -119,14 +120,14 @@ public class EnemyIAController : MonoBehaviour
                 break;
 
             case AIState.Attack:
-            if (navMeshAgent.isActiveAndEnabled) // Asegúrate de que el agente esté activo y habilitado
-            {
-                // Puedes agregar otra verificación si es necesario, aunque isActiveAndEnabled suele ser suficiente
-                if (navMeshAgent.isOnNavMesh) // Esto es redundante si isActiveAndEnabled es True en la práctica, pero más seguro.
+                if (navMeshAgent.isActiveAndEnabled) // Asegúrate de que el agente esté activo y habilitado
                 {
-                    navMeshAgent.isStopped = true; 
+                    // Puedes agregar otra verificación si es necesario, aunque isActiveAndEnabled suele ser suficiente
+                    if (navMeshAgent.isOnNavMesh) // Esto es redundante si isActiveAndEnabled es True en la práctica, pero más seguro.
+                    {
+                        navMeshAgent.isStopped = true; 
+                    }
                 }
-            }
                 // do chase
                 
                 // --- Hacer que el enemigo mire hacia el jugador ---
@@ -154,7 +155,13 @@ public class EnemyIAController : MonoBehaviour
                 }
                 break;
             case AIState.Sleeping:
-                // do sleeping animation
+                if (navMeshAgent.isActiveAndEnabled) // Asegúrate de que el agente esté activo y habilitado
+                {
+                    if (navMeshAgent.isOnNavMesh)
+                    {
+                        navMeshAgent.isStopped = true; 
+                    }
+                }
                 break;
             case AIState.Dying:
                 // do chase

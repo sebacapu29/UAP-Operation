@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using static EnemyIAController;
 
 public class EnemyPool : MonoBehaviour
 {
@@ -41,9 +42,12 @@ public class EnemyPool : MonoBehaviour
 
     void AddEnemyToPool()
     {
-        // GameObject enemy = Instantiate(enemyPrefab);
-        // enemy.SetActive(false);
-        // availableEnemies.Enqueue(enemy);
+        GameObject enemy = Instantiate(enemyPrefab);
+        enemy.SetActive(false);
+        EnemyIAController enemyAI = enemy.GetComponent<EnemyIAController>();
+        enemyAI.CurrentState = AIState.Chase;
+        enemy.tag = "EnemyChaser";
+        availableEnemies.Enqueue(enemy);
     }
 
     public GameObject GetEnemy(Vector3 position)

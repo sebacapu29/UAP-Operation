@@ -12,6 +12,7 @@ TagManager:
   - Bullet
   - MovableObject
   - CardKey
+  - EnemyChaser
   layers:
   - Default
   - TransparentFX
