@@ -51,7 +51,7 @@ public class UIOnGUI : MonoBehaviour
     public void UpdateCollectedItems(string name, int quantity)
     {
         collectedItemsText = "Objeto recolectado " + name + "/" + quantity;
-        Debug.Log("UI Actualizada: " + collectedItemsText);
+        // Debug.Log("UI Actualizada: " + collectedItemsText);
     }
     public void ShowMessage(string message)
     {

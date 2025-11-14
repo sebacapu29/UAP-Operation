@@ -40,7 +40,6 @@ public class EnemyAINavigation : MonoBehaviour
 
         if(isEnemyChaser && _agent.isActiveAndEnabled)
         {
-            Debug.Log("target" , _target);
             _agent.SetDestination(_target.transform.position);
         }
     }
