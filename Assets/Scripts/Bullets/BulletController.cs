@@ -56,18 +56,16 @@ public class BulletController : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Enemy"))
+        if (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("EnemyChaser"))
         {
             EnemyHealth enemyHealth = collision.gameObject.GetComponent<EnemyHealth>();
 
             if(this.tag == "Sedative")
             {
                 enemyHealth?.Sleep();
+                EnemyIAController enemyIA = collision.gameObject.GetComponent<EnemyIAController>();
+                enemyIA.CurrentState = EnemyIAController.AIState.Sleeping;
             }
-            //if (enemyHealth != null)
-            //{
-            //    enemyHealth.TakeDamage(damageAmount);
-            //}
         }
         if (!collision.gameObject.CompareTag("Player"))
         {

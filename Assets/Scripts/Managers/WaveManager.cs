@@ -26,7 +26,26 @@ public class WaveManager : MonoBehaviour
     private int enemiesDefeatedInCurrentWave = 0;
     private float timeToNextWave = 0f;
    private float _reductionInterval = 2f; // cada cuántos segundos
-
+    public static WaveManager Instance;
+    public int CurrentWaveIndex
+    {
+        get { return currentWaveIndex; }
+    }
+    /// <summary>
+    /// Awake is called when the script instance is being loaded.
+    /// </summary>
+    void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+    }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -37,7 +56,7 @@ public class WaveManager : MonoBehaviour
         Enemy.OnEnemyDefeated -= HandleEnemyDefeated;
     }
     //Crea la funcion IEnumarator de StartWaves con indexWave como argumento
-    private System.Collections.IEnumerator StartWaves(int indexWave)
+    public System.Collections.IEnumerator StartWaves(int indexWave)
     {
         if (indexWave >= spawnerWaves.Count)
         {
@@ -84,7 +103,6 @@ public class WaveManager : MonoBehaviour
         //     timeToNextWave = 0f;
         //     StartCoroutine(StartWaves(currentWaveIndex));
         // }
-            
-        
+                
     }
 }
