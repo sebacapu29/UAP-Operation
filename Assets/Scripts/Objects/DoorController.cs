@@ -15,5 +15,6 @@ public class DoorController : MonoBehaviour
             // Simple movimiento de levantar puerta
             transform.position += new Vector3(2.5f, 0f, 0f);
         }
+        AudioManager.Instance.Play("DoorOpen");
     }
 }

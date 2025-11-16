@@ -53,6 +53,7 @@ public class EnemyAINavigation : MonoBehaviour
             _enemyIAController.CurrentState = EnemyIAController.AIState.Chase;            
             _agent.SetDestination(_target.transform.position);
             enemyLookAt.TargetIsAppear = true;
+            AudioManager.Instance.Play("IntruderAlert");
         }
         if (other.CompareTag("Player") && gameObject.tag == "Enemy" && !hasActiveWave && _enemyIAController.CurrentState != EnemyIAController.AIState.Sleeping)
         {
@@ -82,6 +83,7 @@ public class EnemyAINavigation : MonoBehaviour
             //_agent.enabled = false;
             enemyLookAt.TargetIsAppear = false;
             LevelManager.Instance.activateWaveEnemy = false;
+            AudioManager.Instance.Stop("IntruderAlert");
         }
    }
 
