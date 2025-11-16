@@ -147,9 +147,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   delay: 3
-  explosionRadius: 100
-  explosionForce: 700
-  damage: 50
-  explosionEffectPrefab: {fileID: 4975550523701026328}
-  explosionSound: {fileID: 8300000, guid: ff48e11d39f924844a4848d3c110b15b, type: 3}
+  effectRadius: 100
+  sleepDuration: 5
+  gasEffectPrefab: {fileID: 0}
+  gasSound: {fileID: 0}
   destroyDelay: 2

@@ -1,63 +1,61 @@
 using UnityEngine;
+using System.Collections;
 
 public class Grenade : MonoBehaviour
 {
-    [Header("Explosion Settings")]
-    [SerializeField] float delay = 3f; // Tiempo antes de explotar
-    [SerializeField] float explosionRadius = 5f; // Radio de daño
-    [SerializeField] float explosionForce = 700f; // Fuerza física
-    [SerializeField] int damage = 50; // Daño a enemigos
+    [Header("Gas Settings")]
+    [SerializeField] float delay = 3f; // Tiempo antes de liberar el gas
+    [SerializeField] float effectRadius = 5f; // Radio del gas
+    [SerializeField] float sleepDuration = 5f; // Tiempo que el enemigo queda dormido
 
     [Header("Effects")]
-    [SerializeField] GameObject explosionEffectPrefab; // Partículas
-    [SerializeField] AudioClip explosionSound; // Sonido
-    [SerializeField] float destroyDelay = 2f; // Tiempo para destruir efectos
+    [SerializeField] GameObject gasEffectPrefab;
+    [SerializeField] AudioClip gasSound;
+    [SerializeField] float destroyDelay = 2f;
 
-    private bool hasExploded = false;
+    private bool hasReleasedGas = false;
 
     void Start()
     {
-        Invoke(nameof(Explode), delay);
+        Invoke(nameof(ReleaseGas), delay);
     }
 
-    void Explode()
+    void ReleaseGas()
     {
-        if (hasExploded) return;
-        hasExploded = true;
+        if (hasReleasedGas) return;
+        hasReleasedGas = true;
 
         // Instanciar efecto visual
-        if (explosionEffectPrefab != null)
+        if (gasEffectPrefab != null)
         {
-            GameObject effect = Instantiate(explosionEffectPrefab, transform.position, Quaternion.identity);
+            GameObject effect = Instantiate(gasEffectPrefab, transform.position, Quaternion.identity);
             Destroy(effect, destroyDelay);
         }
 
-        // Reproducir sonido
-        if (explosionSound != null)
-        {
-            AudioManager.Instance.Play("Explosion");
-        }
-
-        // Aplicar fuerza y daño en área
-        Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius);
+        // Sonido
+        // if (gasSound != null)
+        // {
+        //     AudioSource.PlayClipAtPoint(gasSound, transform.position);
+        // }
+        AudioManager.Instance.Play("Explosion");
+        // Detectar enemigos en el radio
+        Collider[] colliders = Physics.OverlapSphere(transform.position, effectRadius);
         foreach (Collider nearbyObject in colliders)
         {
-            Rigidbody rb = nearbyObject.GetComponent<Rigidbody>();
-            // if (rb != null)
-            // {
-            //     rb.AddExplosionForce(explosionForce, transform.position, explosionRadius);
-            // }
-
-            // Si es enemigo, aplicar daño
             EnemyHealth enemy = nearbyObject.GetComponent<EnemyHealth>();
-            // Debug.Log("Enemy found: " + enemy); 
             if (enemy != null)
             {
                 enemy.Sleep();
             }
         }
 
-        // Destruir la granada
-        // Destroy(gameObject);
+        Destroy(gameObject);
     }
+
+    // IEnumerator SleepEnemy(EnemyAI enemy)
+    // {
+    //     enemy.Sleep(); // Método que desactiva NavMeshAgent y lógica
+    //     yield return new WaitForSeconds(sleepDuration);
+    //     enemy.WakeUp(); // Método que reactiva todo
+    // }
 }
