@@ -33,7 +33,7 @@ public class GameManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-       
+
         // Cursor.lockState = CursorLockMode.Confined;
         // Cursor.visible = false;
         var currentScene = SceneManager.GetActiveScene().name;
@@ -56,6 +56,10 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
         if (playerHealth != null)
             currentPlayerHealth = playerHealth.Health;
 
@@ -63,9 +67,9 @@ public class GameManager : MonoBehaviour
         {
             // title.text = isGameOver ? "Game Over" : "Mission Complete!";
             // gameOverMenu.SetActive(true);
-            // AudioManager.Instance.Stop("Ambience_Level1");
+            AudioManager.Instance.StopAll();
             // //AudioManager.Instance.Play("GameOver");
-            // Time.timeScale = 0f; // Pause the game
+            //Time.timeScale = 0f; // Pause the game
             // Cursor.visible = true;
         }
 

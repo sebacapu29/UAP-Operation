@@ -41,7 +41,10 @@ public class AudioManager : MonoBehaviour
             Debug.LogWarning($"AudioManager: sonido '{soundName}' no encontrado.");
             return;
         }
-        s.source.Play();
+        if (!s.source.isPlaying)
+        {
+            s.source.Play();
+        }
     }
 
     /// <summary>Detiene un sonido por nombre.</summary>
@@ -49,6 +52,7 @@ public class AudioManager : MonoBehaviour
     {
         var s = System.Array.Find(sounds, item => item.name == soundName);
         if (s == null) return;
+
         s.source.Stop();
     }
 

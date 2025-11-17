@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -12,11 +13,8 @@ public class EnemyAINavigation : MonoBehaviour
     EnemyLookAt enemyLookAt;
     private EnemyIAController _enemyIAController;
     bool isEnemyChaser = false;
-    // private int currentWaveIndex = 0;
-    private float timeToNextWave = 0f;
-   private float _reductionInterval = 10f; // cada cuántos segundos
     private bool hasActiveWave;
-
+    private List<Light> _alertLight = new List<Light>();
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
@@ -30,7 +28,22 @@ public class EnemyAINavigation : MonoBehaviour
 
         enemyLookAt = GetComponent<EnemyLookAt>();
         _enemyIAController = GetComponent<EnemyIAController>();
-        
+        var objsSirenLights = GameObject.FindGameObjectsWithTag("SirenLight");
+        // Debug.Log(objsSirenLights.Length + " Siren Lights found in the scene.");    
+        foreach (var obj in objsSirenLights)
+        {
+            var sirenLight = obj.GetComponents<SirenLight>();
+            // Debug.Log("Siren Light found: " + sirenLight.Length);
+            if (sirenLight != null && sirenLight.Length > 0)
+            { 
+                foreach (var light in sirenLight)
+                {
+                    // Debug.Log("Adding Siren Light to alert list");
+                    // Debug.Log(light);
+                    _alertLight.Add(light.sirenLight);
+                }
+            }
+        }
     }
 
     // Update is called once per frame
@@ -54,27 +67,15 @@ public class EnemyAINavigation : MonoBehaviour
             _agent.SetDestination(_target.transform.position);
             enemyLookAt.TargetIsAppear = true;
             AudioManager.Instance.Play("IntruderAlert");
+            ActivateAlertLight();
         }
         if (other.CompareTag("Player") && gameObject.tag == "Enemy" && !hasActiveWave && _enemyIAController.CurrentState != EnemyIAController.AIState.Sleeping)
         {
-            // timeToNextWave += Time.deltaTime;
-            // if (timeToNextWave <= _reductionInterval)
-            // {
-            //     timeToNextWave = 0f;
-            //     LevelManager.Instance.activateWaveEnemy = true;
-            // }
             hasActiveWave = true;
             WaveManager.Instance.StartCoroutine(WaveManager.Instance.StartWaves(0));
         } 
    }
 
-    void OnTriggerStay(Collider other)
-    {
-        // if(WaveManager.Instance.CurrentWaveIndex > 0 && WaveManager.Instance.CurrentWaveIndex < WaveManager.Instance.spawnerWaves.Count)
-        // {
-        //     hasActiveWave = false;            
-        // }
-    }
     void OnTriggerExit(Collider other)
    {
 
@@ -83,7 +84,13 @@ public class EnemyAINavigation : MonoBehaviour
             //_agent.enabled = false;
             enemyLookAt.TargetIsAppear = false;
             LevelManager.Instance.activateWaveEnemy = false;
-            AudioManager.Instance.Stop("IntruderAlert");
+        }
+   }
+   void ActivateAlertLight()
+   {    
+        foreach (var light in _alertLight)
+        {
+            light.enabled = true;
         }
    }
 

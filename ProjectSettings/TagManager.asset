@@ -13,6 +13,7 @@ TagManager:
   - MovableObject
   - CardKey
   - EnemyChaser
+  - SirenLight
   layers:
   - Default
   - TransparentFX
