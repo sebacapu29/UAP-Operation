@@ -90,15 +90,7 @@ public class EnemyIAController : MonoBehaviour
 
             case AIState.Chase:
                 // do chase
-                if (navMeshAgent.isActiveAndEnabled) // Asegúrate de que el agente esté activo y habilitado
-                {
-                    // Puedes agregar otra verificación si es necesario, aunque isActiveAndEnabled suele ser suficiente
-                    if (navMeshAgent.isOnNavMesh) // Esto es redundante si isActiveAndEnabled es True en la práctica, pero más seguro.
-                    {
-                       navMeshAgent.isStopped = false;
-                    }
-                }
-                
+
                 if (player != null)
                 {
                     //AnimationHandler();

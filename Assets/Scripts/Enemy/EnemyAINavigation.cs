@@ -15,6 +15,9 @@ public class EnemyAINavigation : MonoBehaviour
     bool isEnemyChaser = false;
     private bool hasActiveWave;
     private List<Light> _alertLight = new List<Light>();
+    float _count;
+    float _timer = 1.5f;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
@@ -51,9 +54,15 @@ public class EnemyAINavigation : MonoBehaviour
     {
         isEnemyChaser = gameObject.tag == "EnemyChaser";
 
-        if(isEnemyChaser && _agent.isActiveAndEnabled)
+           _count += Time.deltaTime;
+
+        if (_count >= _timer)
         {
-            _agent.SetDestination(_target.transform.position);
+            _count = 0;
+            if(isEnemyChaser && _agent.isActiveAndEnabled)
+            {
+                _agent.SetDestination(_target.transform.position);
+            }
         }
     }
 
