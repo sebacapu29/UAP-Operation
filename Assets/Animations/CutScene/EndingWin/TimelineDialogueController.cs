@@ -40,9 +40,9 @@ public class TimelineDialogueController : MonoBehaviour
 
     public void LoadMenu()
     {
-        // Ir al menu principal
-        SceneManager.LoadScene("MainMenu");
-        Debug.Log("Ir al Menu Principal");
+        // Ir a los creditos
+        SceneManager.LoadScene("Credits");
+        //Debug.Log("Voy a creditos");
  
     }
 
