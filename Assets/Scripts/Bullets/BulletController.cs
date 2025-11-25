@@ -22,9 +22,26 @@ public class BulletController : MonoBehaviour
         
         if (bulletRB != null)
         {
+            var enemyPosition = GetEnemyPosition();
+            var shootDirection = (enemyPosition - transform.position).normalized;
             // Aplicar la velocidad al Rigidbody.
-            bulletRB.velocity = transform.forward * projectileSpeed;
+            bulletRB.velocity = shootDirection * projectileSpeed;
         }  
+    }
+    Vector3 GetEnemyPosition()
+    {
+        Collider[] colliders = Physics.OverlapSphere(transform.position, 6f);
+        foreach (Collider nearbyObject in colliders)
+        {
+            EnemyHealth enemy = nearbyObject.GetComponent<EnemyHealth>();
+            if (enemy != null)
+            {
+                var enemyState = enemy.GetComponent<EnemyIAController>();
+                if (enemyState != null && enemyState.CurrentState != EnemyIAController.AIState.Sleeping)
+                    return enemy.gameObject.transform.position;
+            }
+        }
+        return transform.forward;
     }
     private void Start()
     {
@@ -49,10 +66,6 @@ public class BulletController : MonoBehaviour
             // Aplicar la velocidad al la bala.
             bulletRB.velocity = direction * projectileSpeed;
         }
-    }
-    private void OnTriggerEnter(Collider other)
-    {
-
     }
     private void OnCollisionEnter(Collision collision)
     {

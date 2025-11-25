@@ -4,41 +4,25 @@ using System.Collections;
 public class Grenade : MonoBehaviour
 {
     [Header("Gas Settings")]
-    [SerializeField] float delay = 3f; // Tiempo antes de liberar el gas
+    [SerializeField] float delay = 4f; // Tiempo antes de liberar el gas
     [SerializeField] float effectRadius = 5f; // Radio del gas
-    [SerializeField] float sleepDuration = 5f; // Tiempo que el enemigo queda dormido
+    // [SerializeField] float sleepDuration = 5f; // Tiempo que el enemigo queda dormido
 
     [Header("Effects")]
     [SerializeField] GameObject gasEffectPrefab;
     [SerializeField] AudioClip gasSound;
-    [SerializeField] float destroyDelay = 2f;
+    // [SerializeField] float destroyDelay = 2f;
 
     private bool hasReleasedGas = false;
 
     void Start()
     {
-        Invoke(nameof(ReleaseGas), delay);
+        Invoke(nameof(ReleaseGas),0f);
+        Invoke(nameof(ImpactGasOnEnemies), delay);
+        Invoke(nameof(EmptyGas), delay + 10f);
     }
-
-    void ReleaseGas()
+    void ImpactGasOnEnemies()
     {
-        if (hasReleasedGas) return;
-        hasReleasedGas = true;
-
-        // Instanciar efecto visual
-        if (gasEffectPrefab != null)
-        {
-            GameObject effect = Instantiate(gasEffectPrefab, transform.position, Quaternion.identity);
-            Destroy(effect, destroyDelay);
-        }
-
-        // Sonido
-        // if (gasSound != null)
-        // {
-        //     AudioSource.PlayClipAtPoint(gasSound, transform.position);
-        // }
-        AudioManager.Instance.Play("Explosion");
-        // Detectar enemigos en el radio
         Collider[] colliders = Physics.OverlapSphere(transform.position, effectRadius);
         foreach (Collider nearbyObject in colliders)
         {
@@ -48,8 +32,17 @@ public class Grenade : MonoBehaviour
                 enemy.Sleep();
             }
         }
+    }   
+    void EmptyGas()
+    {
+       Destroy(gameObject);
+    }
+    void ReleaseGas()
+    {
+         if (hasReleasedGas) return;
+        hasReleasedGas = true;
 
-        Destroy(gameObject);
+        AudioManager.Instance.Play("Explosion");
     }
 
     // IEnumerator SleepEnemy(EnemyAI enemy)

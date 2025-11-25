@@ -9,6 +9,7 @@ public class ResourceManager : MonoBehaviour
     public static Dictionary<string, int> playerInventory = new Dictionary<string, int>();
     private void Awake()
     {
+        transform.SetParent(null);
         // If an instance already exists and it's not this one, destroy this new instance
         if (Instance != null && Instance != this)
         {

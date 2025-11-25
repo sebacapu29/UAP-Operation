@@ -9,7 +9,6 @@ public class LevelManager : MonoBehaviour
     
     [SerializeField] Texture2D cursorTexture; 
     [SerializeField] Vector2 hotSpot = Vector2.zero; 
-    private CursorMode cursorMode = CursorMode.Auto;
 
 
     private void Start()

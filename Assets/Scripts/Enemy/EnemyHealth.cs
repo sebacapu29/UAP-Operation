@@ -60,8 +60,13 @@ public class EnemyHealth : HealthManager, IDamageable
         // 3. Esperamos el timer
         yield return new WaitForSeconds(sleepDuration);
         animator.SetTrigger("StandUp");
-        // 4. Volvemos a Patrol, ocultamos el icono y reactivamos visi�n
-        enemyIA.CurrentState = EnemyIAController.AIState.Patrol;
+
+        // 4. Volvemos a Patrol o Idle, ocultamos el icono y reactivamos visi�n
+        if(enemyIA.HasWayPoints)
+            enemyIA.CurrentState = EnemyIAController.AIState.Patrol; 
+        else
+            enemyIA.CurrentState = EnemyIAController.AIState.Idle;
+
         sleepIcon.SetActive(false);
         campOfVision.enabled = true;
         sleepRoutine = null;
@@ -79,8 +84,10 @@ public class EnemyHealth : HealthManager, IDamageable
         isEnemySleeped = false;
         if (sleepRoutine != null)
             StopCoroutine(sleepRoutine);
+            
+        Debug.Log(gameObject.name);     
+        Debug.Log("enemyHasway points"+ enemyIA.HasWayPoints);
 
-        enemyIA.CurrentState = EnemyIAController.AIState.Patrol; 
         sleepIcon.SetActive(false);
         campOfVision.enabled = true;
         sleepRoutine = null;

@@ -39,6 +39,10 @@ public class EnemyIAController : MonoBehaviour
         get { return currentState; }
         set { currentState = value; }
     }
+    public bool HasWayPoints
+    {
+        get { return patrolWaypoints != null && patrolWaypoints.Length > 0; }
+    }
     void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
@@ -78,8 +82,13 @@ public class EnemyIAController : MonoBehaviour
                     currentState = AIState.Chase;
                     break;
                 }
-                if (navMeshAgent.remainingDistance < navMeshAgent.stoppingDistance && patrolWaypoints.Length > 0)
+             if (!navMeshAgent.pathPending && navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance)
                 {
+                    if(patrolWaypoints.Length == 0)
+                    {
+                        Debug.LogWarning("No hay waypoints asignados para la patrulla.");
+                        break;
+                    }
                     currentWaypointIndex = (currentWaypointIndex + 1) % patrolWaypoints.Length;
                     navMeshAgent.SetDestination(patrolWaypoints[currentWaypointIndex].position);
                 }
@@ -101,11 +110,16 @@ public class EnemyIAController : MonoBehaviour
                     {
                         currentState = AIState.Attack;
                     }
-                    if (transform.tag == "EnemyChaser")
-                        break;
+                    // if (transform.tag == "EnemyChaser")
+                    //     break;
                     // Si el jugador se aleja, volvemos al estado de patrulla.
                     else if (Vector3.Distance(transform.position, player.position) > detectionRange)
                     {
+                        if(patrolWaypoints.Length == 0)
+                        {
+                            currentState = AIState.Idle;
+                            break;
+                        }
                         currentState = AIState.Patrol;
                     }
                 }
