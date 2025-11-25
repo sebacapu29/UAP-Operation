@@ -31,6 +31,7 @@ public class PlayerMovement2 : MonoBehaviour
 
     void Update()
     {
+        if(GameManager.Instance.isGameOver) return;
         float horizontalInput = Input.GetAxisRaw("Horizontal");
         float verticalInput = Input.GetAxisRaw("Vertical");
         HandleMovementAndRotation(horizontalInput, verticalInput);

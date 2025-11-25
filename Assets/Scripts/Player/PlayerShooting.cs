@@ -51,7 +51,16 @@ public class PlayerShooting : MonoBehaviour
 
  private void ThrowGrenade()
 {
+       var quantityGrenade = ResourceManager.Instance.GetResourceQuantity(ResourceType.Grenade);
+
+        if (quantityGrenade <= 0)
+        {
+            Debug.Log("No Grenade");
+            AudioManager.Instance.Play("NoAmmo");
+            return;
+        }
     GameObject grenadeInstance = Instantiate(grenadePrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
+    ResourceManager.Instance.AddResources(ResourceType.Grenade.ToString(), -1);
     Rigidbody rb = grenadeInstance.GetComponent<Rigidbody>();
 
     if (rb != null)

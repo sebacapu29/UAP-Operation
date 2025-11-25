@@ -9,6 +9,7 @@ public class ResourceManager : MonoBehaviour
     public static Dictionary<string, int> playerInventory = new Dictionary<string, int>();
     private void Awake()
     {
+        transform.SetParent(null);
         // If an instance already exists and it's not this one, destroy this new instance
         if (Instance != null && Instance != this)
         {
@@ -25,6 +26,7 @@ public class ResourceManager : MonoBehaviour
     private void Start()
     {
         AddResources("Amunitio", 4);
+        AddResources("Grenade", 1);
     }
 
     public void AddResources(string name, int qty)
@@ -38,7 +40,7 @@ public class ResourceManager : MonoBehaviour
             playerInventory[name] += qty;
         }
 
-        UIOnGUI.Instance.UpdateCollectedItems(name, playerInventory[name]);
+        UIOnGUINew.Instance.UpdateCollectedItems(name, playerInventory[name]);
     }
 
     internal int GetResourceQuantity(ResourceType ammo)
@@ -68,6 +70,7 @@ public class ResourceManager : MonoBehaviour
 public enum ResourceType
 {
     Amunitio,
+    Grenade,
     Health,
     Mana,
     Card

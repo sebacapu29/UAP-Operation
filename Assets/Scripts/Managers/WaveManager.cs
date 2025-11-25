@@ -24,8 +24,8 @@ public class WaveManager : MonoBehaviour
     
     private int currentWaveIndex = 0;
     private int enemiesDefeatedInCurrentWave = 0;
-    private float timeToNextWave = 0f;
-   private float _reductionInterval = 2f; // cada cuántos segundos
+    // private float timeToNextWave = 0f;
+//    private float _reductionInterval = 2f; // cada cuántos segundos
     public static WaveManager Instance;
     public int CurrentWaveIndex
     {
@@ -36,6 +36,7 @@ public class WaveManager : MonoBehaviour
     /// </summary>
     void Awake()
     {
+        transform.SetParent(null);
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);

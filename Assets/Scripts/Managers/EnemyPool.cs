@@ -20,6 +20,7 @@ public class EnemyPool : MonoBehaviour
 
     void Awake()
     {
+        transform.SetParent(null);
         if (Instance == null)
         {
             Instance = this;

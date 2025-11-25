@@ -13,7 +13,6 @@ public class HealthManager : MonoBehaviour, IDamageable
     {
         health -= damage;
         //Animacion de daño
-        Debug.Log("Salud :" + gameObject.name + " " + health);
 
         if (health <= 0)
         {

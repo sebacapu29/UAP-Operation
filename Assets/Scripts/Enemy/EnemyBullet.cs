@@ -27,7 +27,7 @@ public class EnemyBullet : MonoBehaviour
             
             if (playerHealth != null)
             {
-                Debug.Log("Player Hit");
+                AudioManager.Instance.Play("PlayerHurt");
                 playerHealth.TakeDamage(_bulletDamage);
             }
         }
