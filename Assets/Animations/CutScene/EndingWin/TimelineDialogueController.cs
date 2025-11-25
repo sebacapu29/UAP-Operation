@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class TimelineDialogueController : MonoBehaviour
 {
@@ -39,9 +40,9 @@ public class TimelineDialogueController : MonoBehaviour
 
     public void LoadMenu()
     {
-        // Ir al menu principal
-        //SceneManager.LoadScene("MenuPrincipal");
-        Debug.Log("Ir al Menu Principal");
+        // Ir a los creditos
+        SceneManager.LoadScene("Credits");
+        //Debug.Log("Voy a creditos");
  
     }
 

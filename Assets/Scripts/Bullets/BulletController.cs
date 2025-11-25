@@ -7,6 +7,7 @@ public class BulletController : MonoBehaviour
     [SerializeField] float projectileSpeed = 20f;
     [SerializeField] int damageAmount = 25;
     [SerializeField] float timeAlive = 2f;
+    [SerializeField] Transform bulletSpawner; // <- spawner point (puedes asignarlo en el Inspector)
     private Vector3 direction;
 
     Rigidbody bulletRB;
@@ -15,22 +16,56 @@ public class BulletController : MonoBehaviour
     {
         // Obtener el Rigidbody.
         bulletRB = GetComponent<Rigidbody>();
+
+        // Intentar asignar el spawner automáticamente si no está enlazado desde el Inspector.
+        if (bulletSpawner == null)
+        {
+            // Primero buscar un hijo llamado "BulletSpawner"
+            Transform t = transform.Find("BulletSpawner");
+            if (t != null)
+                bulletSpawner = t;
+            else
+            {
+                // Si no existe ese hijo, usar el primer hijo distinto del propio transform
+                foreach (Transform child in GetComponentsInChildren<Transform>())
+                {
+                    if (child != transform)
+                    {
+                        bulletSpawner = child;
+                        break;
+                    }
+                }
+            }
+        }
     }
 
     private void OnEnable() 
     {
-        
-        if (bulletRB != null)
+        if (bulletRB == null) bulletRB = GetComponent<Rigidbody>();
+
+        Vector3 spawnPos = (bulletSpawner != null) ? bulletSpawner.position : transform.position;
+        Vector3 spawnForward = (bulletSpawner != null) ? bulletSpawner.forward : transform.forward;
+
+        // Intentar obtener posición de enemigo; si no hay enemigo, disparar en la dirección del spawner.
+        Vector3 enemyPosition = GetEnemyPosition();
+        Vector3 shootDirection;
+        if (enemyPosition != Vector3.zero)
         {
-            var enemyPosition = GetEnemyPosition();
-            var shootDirection = (enemyPosition - transform.position).normalized;
-            // Aplicar la velocidad al Rigidbody.
-            bulletRB.velocity = shootDirection * projectileSpeed;
-        }  
+            shootDirection = (enemyPosition - spawnPos).normalized;
+        }
+        else
+        {
+            shootDirection = spawnForward.normalized;
+        }
+
+        // Aplicar la velocidad al Rigidbody.
+        bulletRB.velocity = shootDirection * projectileSpeed;
+        bulletRB.rotation = Quaternion.LookRotation(shootDirection);
     }
+
     Vector3 GetEnemyPosition()
     {
-        Collider[] colliders = Physics.OverlapSphere(transform.position, 6f);
+        Collider[] colliders = Physics.OverlapSphere(transform.position, 7f);
         foreach (Collider nearbyObject in colliders)
         {
             EnemyHealth enemy = nearbyObject.GetComponent<EnemyHealth>();
@@ -41,7 +76,7 @@ public class BulletController : MonoBehaviour
                     return enemy.gameObject.transform.position;
             }
         }
-        return transform.forward;
+        return Vector3.zero;
     }
     private void Start()
     {
