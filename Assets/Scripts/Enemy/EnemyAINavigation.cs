@@ -22,17 +22,30 @@ public class EnemyAINavigation : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
-        _target = GameObject.FindGameObjectWithTag("Player");
-        
-        _agent = GetComponent<NavMeshAgent>();
-       
+        InitializeComponents();
+        InitializeAlertLights();       
+        SetEnemyToChaser();
+    }
+    void SetEnemyToChaser()
+    {
+        if(_agent != null && gameObject.tag == "EnemyChaser")
+        {
+            _agent.enabled = true;
+            _agent.SetDestination(_target.transform.position);
+            _enemyIAController.CurrentState = EnemyIAController.AIState.Chase;
+        }
+    }   
+    void InitializeComponents()
+    {
+        _target = GameObject.FindGameObjectWithTag("Player");    
+        _agent = GetComponent<NavMeshAgent>();       
         _agent.speed = _porsuitSpeed;
-        //_agent.enabled = false;
-
         enemyLookAt = GetComponent<EnemyLookAt>();
         _enemyIAController = GetComponent<EnemyIAController>();
-        var objsSirenLights = GameObject.FindGameObjectsWithTag("SirenLight");
-        // Debug.Log(objsSirenLights.Length + " Siren Lights found in the scene.");    
+    }
+    void InitializeAlertLights()
+    {
+        var objsSirenLights = GameObject.FindGameObjectsWithTag("SirenLight");   
         foreach (var obj in objsSirenLights)
         {
             var sirenLight = obj.GetComponents<SirenLight>();
@@ -48,7 +61,6 @@ public class EnemyAINavigation : MonoBehaviour
             }
         }
     }
-
     // Update is called once per frame
     void Update()
     {
@@ -87,7 +99,7 @@ public class EnemyAINavigation : MonoBehaviour
     void OnTriggerExit(Collider other)
    {
 
-        if(other.CompareTag("Player")) 
+        if(other.CompareTag("Player") && !isEnemyChaser) 
         {
             //_agent.enabled = false;
             enemyLookAt.TargetIsAppear = false;

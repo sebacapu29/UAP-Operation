@@ -195,4 +195,18 @@ public class EnemyIAController : MonoBehaviour
         //anim.SetFloat("SpeedX", localVelocity.x, 0.1f, Time.deltaTime);
 
     }
+    #if UNITY_EDITOR
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, detectionRange);
+        Gizmos.color = Color.red;
+        // Gizmos.DrawWireSphere(transform.position, retentionRange);
+        // línea de vista
+        if (player != null)
+        {
+            Gizmos.DrawLine(transform.position + Vector3.up * 0.9f, player.position + Vector3.up * 0.9f);
+        }
+    }
+#endif
 }
