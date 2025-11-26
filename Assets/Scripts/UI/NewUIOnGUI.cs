@@ -39,4 +39,8 @@ public class UIOnGUINew : MonoBehaviour
                 break;
         }
     }
+    public void ShowTutorialMessage(string message)
+    {
+        tutorialText.text = message;
+    }
 }
