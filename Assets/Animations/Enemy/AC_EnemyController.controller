@@ -204,7 +204,7 @@ BlendTree:
     m_Mirror: 0
   - serializedVersion: 2
     m_Motion: {fileID: -203655887218126122, guid: c80cd44d442a05e4cb2843da4aa523ad, type: 3}
-    m_Threshold: -0.67999995
+    m_Threshold: -0.84
     m_Position: {x: -1, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
@@ -212,7 +212,7 @@ BlendTree:
     m_Mirror: 0
   - serializedVersion: 2
     m_Motion: {fileID: -203655887218126122, guid: f9a4552851ad46d45a32eb28330b78ae, type: 3}
-    m_Threshold: -0.35999995
+    m_Threshold: -0.67999995
     m_Position: {x: 1, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
@@ -220,7 +220,7 @@ BlendTree:
     m_Mirror: 0
   - serializedVersion: 2
     m_Motion: {fileID: -203655887218126122, guid: b530b3352fe372a43a541a3d9729d491, type: 3}
-    m_Threshold: -0.03999996
+    m_Threshold: -0.52
     m_Position: {x: 0, y: 1}
     m_TimeScale: 1
     m_CycleOffset: 0
@@ -228,11 +228,43 @@ BlendTree:
     m_Mirror: 0
   - serializedVersion: 2
     m_Motion: {fileID: -203655887218126122, guid: 29f4d764d06b318409f84bf79c9fd6a5, type: 3}
-    m_Threshold: 0.2800001
+    m_Threshold: -0.35999995
     m_Position: {x: 0, y: -1}
     m_TimeScale: 1
     m_CycleOffset: 0
     m_DirectBlendParameter: SpeedZ
+    m_Mirror: 0
+  - serializedVersion: 2
+    m_Motion: {fileID: -203655887218126122, guid: b530b3352fe372a43a541a3d9729d491, type: 3}
+    m_Threshold: -0.19999993
+    m_Position: {x: 1, y: 1}
+    m_TimeScale: 1
+    m_CycleOffset: 0
+    m_DirectBlendParameter: SpeedX
+    m_Mirror: 0
+  - serializedVersion: 2
+    m_Motion: {fileID: -203655887218126122, guid: b530b3352fe372a43a541a3d9729d491, type: 3}
+    m_Threshold: -0.03999996
+    m_Position: {x: -1, y: 1}
+    m_TimeScale: 1
+    m_CycleOffset: 0
+    m_DirectBlendParameter: SpeedX
+    m_Mirror: 0
+  - serializedVersion: 2
+    m_Motion: {fileID: -203655887218126122, guid: 29f4d764d06b318409f84bf79c9fd6a5, type: 3}
+    m_Threshold: 0.120000124
+    m_Position: {x: 1, y: -1}
+    m_TimeScale: 1
+    m_CycleOffset: 0
+    m_DirectBlendParameter: SpeedX
+    m_Mirror: 0
+  - serializedVersion: 2
+    m_Motion: {fileID: -203655887218126122, guid: 29f4d764d06b318409f84bf79c9fd6a5, type: 3}
+    m_Threshold: 0.2800001
+    m_Position: {x: -1, y: -1}
+    m_TimeScale: 1
+    m_CycleOffset: 0
+    m_DirectBlendParameter: SpeedX
     m_Mirror: 0
   m_BlendParameter: SpeedX
   m_BlendParameterY: SpeedZ
