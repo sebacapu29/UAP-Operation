@@ -480,6 +480,123 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &739252283
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 739252285}
+  - component: {fileID: 739252284}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &739252284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 739252283}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65149f177d0760d40b09ab57ed421bdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: Ambience_Level1
+    clip: {fileID: 8300000, guid: 5b46844f9e819d8468aff3d15eaf98bd, type: 3}
+    volume: 0.2
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: Shoot
+    clip: {fileID: 8300000, guid: 51c063c143ae79f4ca09515a933712a5, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: NoAmmo
+    clip: {fileID: 8300000, guid: 5b3a6760a4fd3ed47b4fb6c5a0c3fa56, type: 3}
+    volume: 0.29
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Reload
+    clip: {fileID: 8300000, guid: 180beb793e31b364a90d26dd92b5be12, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: GrabItem
+    clip: {fileID: 8300000, guid: 7588e2c28bb15ed4c97f1ea4b21e59a2, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: LaserShoot
+    clip: {fileID: 8300000, guid: 88ffc1b474de25946808fca0b6105753, type: 3}
+    volume: 0.168
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: ThrowGrenade
+    clip: {fileID: 8300000, guid: 22be6b566fabecc44a6a0953821e129e, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Explosion
+    clip: {fileID: 8300000, guid: ff48e11d39f924844a4848d3c110b15b, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: DoorOpen
+    clip: {fileID: 8300000, guid: 12a9bd5a59ad34d4e9703a38dbcb0787, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: IntruderAlert
+    clip: {fileID: 8300000, guid: 784bf37c71a92484e945c82c6a9f82f9, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: SwitchButton
+    clip: {fileID: 8300000, guid: 70fc0caf10f2df74d85ee326eb408786, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: EndingTheme
+    clip: {fileID: 8300000, guid: 343b28f087e2b824eb00cde32822325e, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+--- !u!4 &739252285
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 739252283}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 2.001762, y: -2.2944953, z: 6.7008543}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &942530446
 GameObject:
   m_ObjectHideFlags: 0
@@ -1221,3 +1338,4 @@ SceneRoots:
   - {fileID: 599283560}
   - {fileID: 989973702}
   - {fileID: 1411454572}
+  - {fileID: 739252285}

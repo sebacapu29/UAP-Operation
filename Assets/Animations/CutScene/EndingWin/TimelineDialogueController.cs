@@ -10,6 +10,10 @@ public class TimelineDialogueController : MonoBehaviour
 
     private Coroutine typingCoroutine;
 
+    void Start()
+    {
+        AudioManager.Instance.Play("EndingTheme");
+    }
     public void ShowDialogue1()
     {
         StartTyping("Agente A7N: ...Al fin lo encuentro....");

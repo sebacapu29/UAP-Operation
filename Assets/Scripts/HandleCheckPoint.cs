@@ -13,7 +13,7 @@ public class HandleCheckPoint : MonoBehaviour
         {
             var qtyCard = ResourceManager.Instance.GetResourceQuantity(ResourceType.Card);
             
-            if (collision.CompareTag("Player") && qtyCard>=1)
+            if (collision.CompareTag("Player"))
             {
                 // Assuming Level_1_Manager has a method to load the next level
                 //Corregir esta mal el level manager

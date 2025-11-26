@@ -8,7 +8,7 @@ public class PlayerCollect : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        resourceManager = resources.GetComponent<ResourceManager>();
+        resourceManager = ResourceManager.Instance;
     }
 
     // Update is called once per frame
