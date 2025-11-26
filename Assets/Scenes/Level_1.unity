@@ -24673,7 +24673,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pickupRange: 1
-  pickupKey: 101
+  pickupKey: 113
   handPosition: {fileID: 887612710}
   pickupOffset: {fileID: 887612710}
 --- !u!1001 &939094108

@@ -36,7 +36,6 @@ public class PlayerHealth : HealthManager
     {
         if(health <=0) UIOnGUINew.Instance.UpdateCollectedItems("Health", 0);
         else UIOnGUINew.Instance.UpdateCollectedItems("Health", Health);
-        
         if (!isDead || sceneLoaded) return;
         if (playerAnimator == null) return;
         // Verificar si la animación de "Death" terminó (normalizedTime >= 1)
