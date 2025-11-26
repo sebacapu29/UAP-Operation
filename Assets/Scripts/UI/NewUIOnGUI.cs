@@ -11,7 +11,7 @@ public class UIOnGUINew : MonoBehaviour
     [SerializeField] private TextMeshProUGUI healthText;
     [SerializeField] private TextMeshProUGUI ammoText;
     [SerializeField] private TextMeshProUGUI grenadeText;
-
+    [SerializeField] private TextMeshProUGUI tutorialText;  
     private void Awake()
     {
         if (Instance != null && Instance != this)
