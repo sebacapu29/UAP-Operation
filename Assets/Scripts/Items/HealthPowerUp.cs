@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class HealthPowerUp : MonoBehaviour
@@ -30,7 +31,7 @@ public class HealthPowerUp : MonoBehaviour
                     
                     // Llama a la función para curar al jugador
                     healthManager.Heal(healthAmount); 
-                    
+                    AudioManager.Instance.Play("HealthUp");
                     // Muestra un mensaje de que el power-up se usó
                     Debug.Log($"El jugador recogió el power-up de salud. Salud aumentada en {healthAmount}.");
 
